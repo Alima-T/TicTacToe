@@ -16,20 +16,19 @@ public class MainGame {
 
     public static void main (String[] args) {
 
-        Scanner player1 = new Scanner(System.in);
-        Scanner player2 = new Scanner(System.in);
-
         printBoard();
+
+        Scanner scanner = new Scanner(System.in);
 
         print(GREETING);
 
-        String player1Name = player1.next();
-        String player2Name = player2.next();
+        String player1Name = scanner.next();
+        String player2Name = scanner.next();
 
         while (true) {
             print(player1Name+INPUT_MESSAGE);
-            inputVertical = player1.nextInt();
-            inputHorizontal = player1.nextInt();
+            inputVertical = scanner.nextInt();
+            inputHorizontal = scanner.nextInt();
 
             if (checkInput(inputVertical, inputHorizontal)) {
                 board[inputVertical][inputHorizontal] = X;
@@ -41,8 +40,8 @@ public class MainGame {
             }
 
             print(player2Name+INPUT_MESSAGE);
-            inputVertical = player2.nextInt();
-            inputHorizontal = player2.nextInt();
+            inputVertical = scanner.nextInt();
+            inputHorizontal = scanner.nextInt();
 
             if (checkInput(inputVertical, inputHorizontal)) {
                 board[inputVertical][inputHorizontal] = O;

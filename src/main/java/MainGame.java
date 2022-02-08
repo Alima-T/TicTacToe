@@ -10,16 +10,18 @@ public class MainGame {
     final static String NEW_START_MESSAGE = "To start a new game write \"Y\" and press enter";
     final static String X = " X ";
     final static String O = " O ";
-    public static String[][] board = new String[][]{{" _ ", " _ ", " _ "}, {" _ ", " _ ", " _ "}, {" _ ", " _ ", " _ "}};
+    final static String FREE = " _ ";
+    public static String[][] board = new String[3][3];
     public static int inputVertical;
     public static int inputHorizontal;
 
     public static void main (String[] args) {
 
+        fillMatrix(board);
+        printBoard();
+
         Scanner player1 = new Scanner(System.in);
         Scanner player2 = new Scanner(System.in);
-
-        printBoard();
 
         print(GREETING);
 
@@ -53,6 +55,12 @@ public class MainGame {
                 break;
             }
         }
+    }
+
+    static void fillMatrix(String[][] matrix){
+        for (int i=0; i<matrix.length;i++)
+            for (int j=0; j<matrix.length;j++)
+                matrix[i][j]= FREE;
     }
 
 

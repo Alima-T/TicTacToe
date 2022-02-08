@@ -34,7 +34,7 @@ public class MainGame {
             if (checkInput(inputVertical, inputHorizontal)) {
                 board[inputVertical][inputHorizontal] = X;
                 printBoard(board);
-            }else break;
+            }
             if (checkWinner(X)) {
                 print(player1Name+WINNER_MESSAGE);
                 break;
@@ -47,7 +47,7 @@ public class MainGame {
             if (checkInput(inputVertical, inputHorizontal)) {
                 board[inputVertical][inputHorizontal] = O;
                 printBoard(board);
-            }else break;
+            }
             if (checkWinner(O)) {
                 print(player2Name+WINNER_MESSAGE);
                 break;

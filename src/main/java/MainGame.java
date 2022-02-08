@@ -23,11 +23,11 @@ public class MainGame {
 
         print(GREETING);
 
-        String namePlayer1 = player1.next();
-        String namePlayer2 = player2.next();
+        String player1Name = player1.next();
+        String player2Name = player2.next();
 
         while (true) {
-            print(namePlayer1+INPUT_MESSAGE);
+            print(player1Name+INPUT_MESSAGE);
             inputVertical = player1.nextInt();
             inputHorizontal = player1.nextInt();
 
@@ -36,11 +36,11 @@ public class MainGame {
                 printBoard();
             }
             if (checkWinner(X)) {
-                print(namePlayer1+WINNER_MESSAGE);
+                print(player1Name+WINNER_MESSAGE);
                 break;
             }
 
-            print(namePlayer2+INPUT_MESSAGE);
+            print(player2Name+INPUT_MESSAGE);
             inputVertical = player2.nextInt();
             inputHorizontal = player2.nextInt();
 
@@ -49,7 +49,7 @@ public class MainGame {
                 printBoard();
             }
             if (checkWinner(O)) {
-                print(namePlayer2+WINNER_MESSAGE);
+                print(player2Name+WINNER_MESSAGE);
                 break;
             }
         }

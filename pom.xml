@@ -1,0 +1,7 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>pro.aokhapkina</groupId>
+    <artifactId>tic-tac-toe</artifactId>
+    <version>0.1-SNAPSHOT</version>
+</project>

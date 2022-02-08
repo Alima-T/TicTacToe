@@ -86,7 +86,7 @@ public class MainGame {
     static boolean checkIfFieldIsFree () {
         for (int v = 0; v<board.length; v++) {
             for (int h = 0; h<board.length; h++) {
-                if (board[v][h] == " _ ") {
+                if (board[v][h] == FREE) {
                     return true;
                 }
             }

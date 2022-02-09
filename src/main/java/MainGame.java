@@ -22,8 +22,9 @@ public class MainGame {
         printBoard();
 
         print(GREETING);
-
         String player1Name = player1.next();
+
+        print(GREETING);
         String player2Name = player2.next();
 
         while (true) {

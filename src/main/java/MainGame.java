@@ -87,13 +87,13 @@ public class MainGame {
     }
 
     static boolean checkWinner (String s) {
-        for (int i = 0; i<board.length; i++) {
+        for (int i = 0; i < board.length; i++) {
             if ((board[i][0] == s & board[i][1] == s & board[i][2] == s) || (board[0][i] == s & board[1][i] == s & board[2][i] == s)) {
                 return true;
             }
-            if ((board[0][0] == s & board[1][1] == s & board[2][2] == s) || (board[0][2] == s & board[1][1] == s & board[2][0] == s)) {
-                return true;
-            }
+        }
+        if ((board[0][0] == s & board[1][1] == s & board[2][2] == s) || (board[0][2] == s & board[1][1] == s & board[2][0] == s)) {
+            return true;
         }
         return false;
     }

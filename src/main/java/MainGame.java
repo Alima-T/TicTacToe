@@ -15,7 +15,6 @@ public class MainGame {
     public static int inputHorizontal;
 
     public static void main (String[] args) {
-
         printBoard();
 
         Scanner scanner = new Scanner(System.in);
@@ -32,7 +31,7 @@ public class MainGame {
 
             if (checkInput(inputVertical, inputHorizontal)) {
                 board[inputVertical][inputHorizontal] = X;
-                printBoard();
+                printBoard(board);
             }
             if (checkWinner(X)) {
                 print(player1Name+WINNER_MESSAGE);
@@ -45,7 +44,7 @@ public class MainGame {
 
             if (checkInput(inputVertical, inputHorizontal)) {
                 board[inputVertical][inputHorizontal] = O;
-                printBoard();
+                printBoard(board);
             }
             if (checkWinner(O)) {
                 print(player2Name+WINNER_MESSAGE);
@@ -97,8 +96,8 @@ public class MainGame {
         return false;
     }
 
-    static void printBoard () {
-        for (String[] array: board) {
+    static void printBoard (String[][] matrix) {
+        for (String[] array: matrix) {
             for (String s: array) {
                 System.out.print(" "+ s +" ");
             }

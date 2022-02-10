@@ -17,7 +17,7 @@ public class MainGame {
 
     public static void main (String[] args) {
 
-        fillMatrix(board);
+        fillBoard(board);
         printBoard();
 
         Scanner player1 = new Scanner(System.in);
@@ -57,10 +57,15 @@ public class MainGame {
         }
     }
 
-    static void fillMatrix(String[][] matrix){
-        for (int i=0; i<matrix.length;i++)
-            for (int j=0; j<matrix.length;j++)
-                matrix[i][j]= FREE;
+    static void fillBoard (String[][] board) {
+        for (int i = 0; i < board.length; i++) {
+            final String[] row = board[i];
+            {
+                for (int j = 0; j < row.length; j++) {
+                    board[i][j] = FREE;
+                }
+            }
+        }
     }
 
 

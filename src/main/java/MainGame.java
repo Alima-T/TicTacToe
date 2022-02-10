@@ -15,21 +15,19 @@ public class MainGame {
     public static int inputHorizontal;
 
     public static void main (String[] args) {
+        printBoard();
 
-        Scanner player1 = new Scanner(System.in);
-        Scanner player2 = new Scanner(System.in);
-
-        printBoard(board);
+        Scanner scanner = new Scanner(System.in);
 
         print(GREETING);
 
-        String player1Name = player1.next();
-        String player2Name = player2.next();
+        String player1Name = scanner.next();
+        String player2Name = scanner.next();
 
         while (true) {
             print(player1Name+INPUT_MESSAGE);
-            inputVertical = player1.nextInt();
-            inputHorizontal = player1.nextInt();
+            inputVertical = scanner.nextInt();
+            inputHorizontal = scanner.nextInt();
 
             if (checkInput(inputVertical, inputHorizontal)) {
                 board[inputVertical][inputHorizontal] = X;
@@ -41,8 +39,8 @@ public class MainGame {
             }
 
             print(player2Name+INPUT_MESSAGE);
-            inputVertical = player2.nextInt();
-            inputHorizontal = player2.nextInt();
+            inputVertical = scanner.nextInt();
+            inputHorizontal = scanner.nextInt();
 
             if (checkInput(inputVertical, inputHorizontal)) {
                 board[inputVertical][inputHorizontal] = O;
@@ -87,13 +85,13 @@ public class MainGame {
     }
 
     static boolean checkWinner (String s) {
-        for (int i = 0; i<board.length; i++) {
+        for (int i = 0; i < board.length; i++) {
             if ((board[i][0] == s & board[i][1] == s & board[i][2] == s) || (board[0][i] == s & board[1][i] == s & board[2][i] == s)) {
                 return true;
             }
-            if ((board[0][0] == s & board[1][1] == s & board[2][2] == s) || (board[0][2] == s & board[1][1] == s & board[2][0] == s)) {
-                return true;
-            }
+        }
+        if ((board[0][0] == s & board[1][1] == s & board[2][2] == s) || (board[0][2] == s & board[1][1] == s & board[2][0] == s)) {
+            return true;
         }
         return false;
     }

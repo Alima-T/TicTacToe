@@ -15,12 +15,12 @@ public class MainGame {
     public static int inputHorizontal;
 
     public static void main (String[] args) {
-        printBoard();
+        printBoard(board);
 
         Scanner scanner = new Scanner(System.in);
 
         print(GREETING);
-        String player1Name = player1.next();
+        String player1Name = scanner.next();
 
         print(GREETING);
         String player2Name = scanner.next();

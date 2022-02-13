@@ -67,7 +67,7 @@ public class MainGame {
     }
 
     static boolean checkInput (int v, int h) {
-        if (!checkInputNums(v, h)) {
+        if (!checkIfInputAreNums(v, h)) {
             return false;
         } else {
             if (!checkIfFieldIsFree(inputVertical, inputHorizontal, board)) {
@@ -77,8 +77,15 @@ public class MainGame {
         return true;
     }
 
-    static boolean checkInputNums (int v, int h) {
-        return (v>=0 & v<=2) || (h>=0 & h<=2);
+    static boolean checkIfInputAreNums (int v, int h) {
+        try {
+            if (!(v >= 0 & v <= 2) || !(h >= 0 & h <= 2)) {
+                return false;
+            }
+        }catch (Exception ex) {
+            System.out.print(" ");
+        }
+        return true;
     }
 
 

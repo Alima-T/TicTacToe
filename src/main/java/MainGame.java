@@ -32,7 +32,7 @@ public class MainGame {
                 inputHorizontal = scanner.nextInt();
                 fillBoard(inputVertical, inputHorizontal, X);
 
-                if (!checkIfFieldIsFree()) {
+                if (!checkIfFieldIsFree(inputVertical, inputHorizontal, board)) {
                     System.out.println(FIELD_IS_TAKEN_MESSAGE);
                 }
             } while (!checkInput(inputVertical, inputHorizontal));
@@ -49,7 +49,7 @@ public class MainGame {
                 inputHorizontal = scanner.nextInt();
                 fillBoard(inputVertical, inputHorizontal, O);
 
-                if (!checkIfFieldIsFree()) {
+                if (!checkIfFieldIsFree(inputVertical, inputHorizontal, board)) {
                     System.out.println(FIELD_IS_TAKEN_MESSAGE);
                 }
             } while (!checkInput(inputVertical, inputHorizontal));
@@ -70,7 +70,7 @@ public class MainGame {
         if (!checkInputNums(v, h)) {
             return false;
         } else {
-            if (!checkIfFieldIsFree()) {
+            if (!checkIfFieldIsFree(inputVertical, inputHorizontal, board)) {
                 return false;
             }
         }
@@ -81,15 +81,16 @@ public class MainGame {
         return (v>=0 & v<=2) || (h>=0 & h<=2);
     }
 
-    static boolean checkIfFieldIsFree () {
-        for (int v = 0; v<board.length; v++) {
-            for (int h = 0; h<board.length; h++) {
-                if (board[v][h] == " _ ") {
-                    return true;
-                }
+
+    static boolean checkIfFieldIsFree (int v, int h, String[][] board) {
+        try {
+            if (board[v][h] != " _ ") {
+                return false;
             }
-        }
-        return false;
+        }catch (Exception ex){
+            System.out.print(" ");
+            }
+        return true;
     }
 
     static boolean checkWinner (String s) {

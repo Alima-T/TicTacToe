@@ -30,12 +30,17 @@ public class MainGame {
                 print(player1Name + INPUT_MESSAGE);
                 inputVertical = scanner.nextInt();
                 inputHorizontal = scanner.nextInt();
-                fillBoard(inputVertical, inputHorizontal, X);
+
+                if (!checkIfInputAreNums(inputVertical, inputHorizontal)) {
+                    System.out.println(ERROR_OUT_OF_BOARD);
+                }
 
                 if (!checkIfFieldIsFree(inputVertical, inputHorizontal, board)) {
                     System.out.println(FIELD_IS_TAKEN_MESSAGE);
                 }
             } while (!checkIfInputIsCorrect(inputVertical, inputHorizontal));
+
+            fillBoard(inputVertical, inputHorizontal, X);
             printBoard(board);
 
             if (checkWinner(X)) {
@@ -47,12 +52,18 @@ public class MainGame {
                 print(player2Name + INPUT_MESSAGE);
                 inputVertical = scanner.nextInt();
                 inputHorizontal = scanner.nextInt();
-                fillBoard(inputVertical, inputHorizontal, O);
+
+                if (!checkIfInputAreNums(inputVertical, inputHorizontal)) {
+                    System.out.println(ERROR_OUT_OF_BOARD);
+                }
 
                 if (!checkIfFieldIsFree(inputVertical, inputHorizontal, board)) {
                     System.out.println(FIELD_IS_TAKEN_MESSAGE);
                 }
             } while (!checkIfInputIsCorrect(inputVertical, inputHorizontal));
+
+            fillBoard(inputVertical, inputHorizontal, O);
+
             printBoard(board);
             if (checkWinner(O)) {
                 print(player2Name+WINNER_MESSAGE);

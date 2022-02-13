@@ -35,7 +35,7 @@ public class MainGame {
                 if (!checkIfFieldIsFree(inputVertical, inputHorizontal, board)) {
                     System.out.println(FIELD_IS_TAKEN_MESSAGE);
                 }
-            } while (!checkInput(inputVertical, inputHorizontal));
+            } while (!checkIfInputIsCorrect(inputVertical, inputHorizontal));
             printBoard(board);
 
             if (checkWinner(X)) {
@@ -52,7 +52,7 @@ public class MainGame {
                 if (!checkIfFieldIsFree(inputVertical, inputHorizontal, board)) {
                     System.out.println(FIELD_IS_TAKEN_MESSAGE);
                 }
-            } while (!checkInput(inputVertical, inputHorizontal));
+            } while (!checkIfInputIsCorrect(inputVertical, inputHorizontal));
             printBoard(board);
             if (checkWinner(O)) {
                 print(player2Name+WINNER_MESSAGE);
@@ -66,7 +66,7 @@ public class MainGame {
         System.out.println(s);
     }
 
-    static boolean checkInput (int v, int h) {
+    static boolean checkIfInputIsCorrect (int v, int h) {
         if (!checkIfInputAreNums(v, h)) {
             return false;
         } else {

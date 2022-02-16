@@ -1,8 +1,8 @@
 import java.util.Scanner;
 
-public class MainGame {
+public class TicTacToeGame {
     final static String GREETING = "Welcome to the game. What is your name?";
-    final static String INPUT_MESSAGE = ", please enter numbers from 0 to 2"+" to choose the coordinates of the field horizontally and vertically: ";
+    final static String INPUT_MESSAGE = ", please enter numbers from 0 to 2 to choose the coordinates of the field horizontally and vertically: ";
     final static String ERROR_NOT_NUMBER = "Error! You entered not a number.";
     final static String ERROR_OUT_OF_BOARD = "Error! The data is out of the board.";
     final static String FIELD_IS_TAKEN_MESSAGE = "Error! This field is already taken. Please try again.";
@@ -44,7 +44,7 @@ public class MainGame {
             printBoard(board);
 
             if (checkWinner(X)) {
-                print(player1Name+WINNER_MESSAGE);
+                print(player1Name + WINNER_MESSAGE);
                 break;
             }
 
@@ -63,15 +63,14 @@ public class MainGame {
             } while (!checkIfInputIsCorrect(inputVertical, inputHorizontal));
 
             fillBoard(inputVertical, inputHorizontal, O);
-
             printBoard(board);
+
             if (checkWinner(O)) {
-                print(player2Name+WINNER_MESSAGE);
+                print(player2Name + WINNER_MESSAGE);
                 break;
             }
         }
     }
-
 
     static void print (String s) {
         System.out.println(s);
@@ -113,16 +112,15 @@ public class MainGame {
     static void printBoard (String[][] matrix) {
         for (String[] array: matrix) {
             for (String s: array) {
-                System.out.print(" "+ s +" ");
+                System.out.print(" " + s + " ");
             }
             System.out.println("\n");
         }
     }
 
-
-    static void fillBoard(int v, int h, String sing) {
+    static void fillBoard (int v, int h, String sign) {
         try {
-            board[v][h] = sing;
+            board[v][h] = sign;
         } catch (Exception ex) {
             System.out.println(ERROR_OUT_OF_BOARD);
         }

@@ -88,12 +88,16 @@ public class TicTacToeGame {
     }
 
     static boolean checkIfInputAreNums (int v, int h) {
-        if (!(v >= 0 & v <= 2) || !(h >= 0 & h <= 2)) return false;
+        if (!(v >= 0 & v <= 2) || !(h >= 0 & h <= 2)) {
+            return false;
+        }
         return true;
     }
 
     static boolean checkIfFieldIsFree (int v, int h, String[][] board) {
-        if (board[v][h] != " _ ") return false;
+        if (board[v][h] != " _ ") {
+            return false;
+        }
         return true;
     }
 

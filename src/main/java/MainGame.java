@@ -89,25 +89,12 @@ public class MainGame {
     }
 
     static boolean checkIfInputAreNums (int v, int h) {
-        try {
-            if (!(v >= 0 & v <= 2) || !(h >= 0 & h <= 2)) {
-                return false;
-            }
-        }catch (Exception ex) {
-            System.out.print(" ");
-        }
+        if (!(v >= 0 & v <= 2) || !(h >= 0 & h <= 2)) return false;
         return true;
     }
 
-
     static boolean checkIfFieldIsFree (int v, int h, String[][] board) {
-        try {
-            if (board[v][h] != " _ ") {
-                return false;
-            }
-        }catch (Exception ex){
-            System.out.print(" ");
-            }
+        if (board[v][h] != " _ ") return false;
         return true;
     }
 

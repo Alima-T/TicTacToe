@@ -30,15 +30,8 @@ public class TicTacToeGame {
                 print(player1Name + INPUT_MESSAGE);
                 inputVertical = scanner.nextInt();
                 inputHorizontal = scanner.nextInt();
-
-                if (!checkIfInputAreNums(inputVertical, inputHorizontal)) {
-                    System.out.println(ERROR_OUT_OF_BOARD);
-                }
-
-                if (!checkIfFieldIsFree(inputVertical, inputHorizontal, board)) {
-                    System.out.println(FIELD_IS_TAKEN_MESSAGE);
-                }
-            } while (!checkIfInputIsCorrect(inputVertical, inputHorizontal));
+            }
+            while (!checkIfInputIsCorrect(inputVertical, inputHorizontal));
 
             fillBoard(inputVertical, inputHorizontal, X);
             printBoard(board);
@@ -52,15 +45,8 @@ public class TicTacToeGame {
                 print(player2Name + INPUT_MESSAGE);
                 inputVertical = scanner.nextInt();
                 inputHorizontal = scanner.nextInt();
-
-                if (!checkIfInputAreNums(inputVertical, inputHorizontal)) {
-                    System.out.println(ERROR_OUT_OF_BOARD);
-                }
-
-                if (!checkIfFieldIsFree(inputVertical, inputHorizontal, board)) {
-                    System.out.println(FIELD_IS_TAKEN_MESSAGE);
-                }
-            } while (!checkIfInputIsCorrect(inputVertical, inputHorizontal));
+            }
+            while (!checkIfInputIsCorrect(inputVertical, inputHorizontal));
 
             fillBoard(inputVertical, inputHorizontal, O);
             printBoard(board);
@@ -78,9 +64,11 @@ public class TicTacToeGame {
 
     static boolean checkIfInputIsCorrect (int v, int h) {
         if (!checkIfInputAreNums(v, h)) {
+            System.out.println(ERROR_OUT_OF_BOARD);
             return false;
         } else {
             if (!checkIfFieldIsFree(inputVertical, inputHorizontal, board)) {
+                System.out.println(FIELD_IS_TAKEN_MESSAGE);
                 return false;
             }
         }

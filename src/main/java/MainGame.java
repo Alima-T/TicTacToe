@@ -60,10 +60,8 @@ public class MainGame {
     static void fillBoard (String[][] board) {
         for (int i = 0; i < board.length; i++) {
             final String[] row = board[i];
-            {
-                for (int j = 0; j < row.length; j++) {
-                    board[i][j] = FREE;
-                }
+            for (int j = 0; j < row.length; j++) {
+                board[i][j] = FREE;
             }
         }
     }

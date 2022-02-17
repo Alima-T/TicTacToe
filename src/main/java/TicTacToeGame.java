@@ -95,8 +95,12 @@ public class TicTacToeGame {
     }
 
     static boolean checkIfFieldIsFree (int v, int h, String[][] board) {
-        if (board[v][h] != " _ ") {
-            return false;
+        try {
+            if (board[v][h] != " _ ") {
+                return false;
+            }
+        } catch (Exception ex) {
+            System.out.println(" ");
         }
         return true;
     }

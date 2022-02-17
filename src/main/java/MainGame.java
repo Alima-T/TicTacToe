@@ -71,7 +71,13 @@ public class MainGame {
     }
 
     static boolean checkInputNums (int v, int h) {
-        return (v>=0 & v<=2) || (h>=0 & h<=2);
+        for (v = 0; v < board.length; v++) {
+            final String[] row = board[h];
+            for (h = 0; h < row.length; h++) {
+                return true;
+            }
+        }
+        return false;
     }
 
     static boolean checkIfFieldIsFree () {

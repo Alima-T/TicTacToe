@@ -16,8 +16,8 @@ public class MainGame {
     private static final String INPUT_VERTICAL_MESSAGE = ". Please enter vertical position:";
     private static final String INPUT_HORIZONTAL_MESSAGE = ". Please enter horizontal position:";
     public static String[][] board = createBoard();
-    public static int inputVertical;
-    public static int inputHorizontal;
+    public static Integer inputVertical;
+    public static Integer inputHorizontal;
 
     public static void main(String[] args) {
         printBoard(board);
@@ -33,22 +33,13 @@ public class MainGame {
         String currentPlayer = player1Name;
         String currentSign = X;
         while (true) {
-            while (true) {
-                print(currentPlayer + INPUT_VERTICAL_MESSAGE);
-                inputVertical = scanner.nextInt();
-                if (isCorrectInput(inputVertical)) {
-                    break;
-                }
-                print(WRONG_INPUT);
-            }
-            while (true) {
-                print(currentPlayer + INPUT_HORIZONTAL_MESSAGE);
-                inputHorizontal = scanner.nextInt();
-                if (isCorrectInput(inputHorizontal)) {
-                    break;
-                }
-                print(WRONG_INPUT);
-            }
+            do {
+                inputVertical = readInput(scanner, currentPlayer + INPUT_VERTICAL_MESSAGE);
+            } while(inputVertical == null);
+            do {
+                inputHorizontal = readInput(scanner, currentPlayer + INPUT_HORIZONTAL_MESSAGE);
+            } while(inputHorizontal == null);
+
             if (!isFree(inputVertical, inputHorizontal)) {
                 print(FIELD_IS_TAKEN_MESSAGE);
             }
@@ -63,6 +54,16 @@ public class MainGame {
             currentPlayer = currentPlayer.equals(player1Name) ? player2Name : player1Name;
             currentSign = currentSign.equals(X) ? O : X;
         }
+    }
+
+    private static Integer readInput(Scanner scanner, String message) {
+        print(message);
+        final int input  = scanner.nextInt();
+        if (isCorrectInput(input)) {
+            return input;
+        }
+        print(WRONG_INPUT);
+        return null;
     }
 
     private static boolean isCorrectInput(int inputVertical) {

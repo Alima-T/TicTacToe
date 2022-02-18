@@ -8,9 +8,9 @@ public class MainGame {
     final static String FIELD_IS_TAKEN_MESSAGE = "This field is already taken. Please try again: ";
     final static String WINNER_MESSAGE = "! Congratulations! You won!";
     final static String NEW_START_MESSAGE = "To start a new game write \"Y\" and press enter";
-    final static String X = " X ";
-    final static String O = " O ";
-    final static String EMPTY = " _ ";
+    final static String X = "X";
+    final static String O = "O";
+    final static String EMPTY = "_";
     public static String[][] board = new String[][]{{EMPTY, EMPTY, EMPTY}, {EMPTY, EMPTY, EMPTY}, {EMPTY, EMPTY, EMPTY}};
     public static int inputVertical;
     public static int inputHorizontal;
@@ -102,7 +102,7 @@ public class MainGame {
     static void printBoard (String[][] matrix) {
         for (String[] array: matrix) {
             for (String s: array) {
-                System.out.print(" "+ s +" ");
+                System.out.print("  " + s + "  ");
             }
             System.out.println("\n");
         }

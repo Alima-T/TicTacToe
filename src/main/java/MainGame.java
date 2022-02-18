@@ -64,7 +64,7 @@ public class MainGame {
         if (!checkInputNums(v, h)) {
             System.out.println(ERROR_MESSAGE);
         } else {
-            if (!checkIfFieldIsFree()) {
+            if (!checkIfFieldIsFree(v, h)) {
                 System.out.println(FIELD_IS_TAKEN_MESSAGE);
             }
         }
@@ -75,16 +75,8 @@ public class MainGame {
         return (v>=0 & v<=2) || (h>=0 & h<=2);
     }
 
-    static boolean checkIfFieldIsFree () {
-        for (int v = 0; v<board.length; v++) {
-            for (int h = 0; h<board.length; h++) {
-
-                if (board[v][h] == EMPTY) {
-                    return true;
-                }
-            }
-        }
-        return false;
+    static boolean checkIfFieldIsFree (int v, int h) {
+        return EMPTY.equals(board[v][h]);
     }
 
     static boolean checkWinner (String s) {

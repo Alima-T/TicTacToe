@@ -15,7 +15,7 @@ public class MainGame {
     final static String WRONG_INPUT = "Wrong input. Please enter numbers from 0 to " + (SIZE - 1);
     private static final String INPUT_VERTICAL_MESSAGE = ". Please enter vertical position:";
     private static final String INPUT_HORIZONTAL_MESSAGE = ". Please enter horizontal position:";
-    public static String[][] board = createBoard(SIZE);
+    public static String[][] board = createBoard();
     public static int inputVertical;
     public static int inputHorizontal;
 
@@ -126,10 +126,10 @@ public class MainGame {
         }
     }
 
-    private static String[][] createBoard(int size) {
-        final String[][] board = new String[size][size];
-        for (int v = 0; v < size; v++) {
-            for (int h = 0; h < size; h++) {
+    private static String[][] createBoard() {
+        final String[][] board = new String[SIZE][SIZE];
+        for (int v = 0; v < SIZE; v++) {
+            for (int h = 0; h < SIZE; h++) {
                 board[v][h] = EMPTY;
             }
         }

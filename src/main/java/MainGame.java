@@ -4,16 +4,17 @@ import java.util.function.Function;
 
 public class MainGame {
     final static String GREETING = "Welcome to the game. What is your name?";
-    final static String INPUT_MESSAGE = ", please enter numbers from 0 to 2" + " to choose the coordinates of the field horizontally and vertically: ";
 
-    final static String ERROR_MESSAGE = "Please enter the correct coordinates: ";
-    final static String FIELD_IS_TAKEN_MESSAGE = "This field is already taken. Please try again: ";
+
+    final static String FIELD_IS_TAKEN_MESSAGE = "This field is already taken. Please try again. ";
     final static String WINNER_MESSAGE = "! Congratulations! You won!";
-    final static String NEW_START_MESSAGE = "To start a new game write \"Y\" and press enter";
     final static String X = "X";
     final static String O = "O";
     final static String EMPTY = "_";
     final static int SIZE = 3;
+    final static String WRONG_INPUT = "Wrong input. Please enter numbers from 0 to " + (SIZE - 1);
+    private static final String INPUT_VERTICAL_MESSAGE = ". Please enter vertical position:";
+    private static final String INPUT_HORIZONTAL_MESSAGE = ". Please enter horizontal position:";
     public static String[][] board = createBoard(SIZE);
     public static int inputVertical;
     public static int inputHorizontal;
@@ -29,79 +30,73 @@ public class MainGame {
         print(GREETING);
         String player2Name = scanner.next();
 
+        String currentPlayer = player1Name;
+        String currentSign = X;
         while (true) {
-            print(player1Name + INPUT_MESSAGE);
-            inputVertical = scanner.nextInt();
-            inputHorizontal = scanner.nextInt();
-
-            if (checkInput(inputVertical, inputHorizontal)) {
-                board[inputVertical][inputHorizontal] = X;
-                printBoard(board);
+            while (true) {
+                print(currentPlayer + INPUT_VERTICAL_MESSAGE);
+                inputVertical = scanner.nextInt();
+                if (isCorrectInput(inputVertical)) {
+                    break;
+                }
+                print(WRONG_INPUT);
             }
-            if (checkWinner(X)) {
-                print(player1Name + WINNER_MESSAGE);
+            while (true) {
+                print(currentPlayer + INPUT_HORIZONTAL_MESSAGE);
+                inputHorizontal = scanner.nextInt();
+                if (isCorrectInput(inputHorizontal)) {
+                    break;
+                }
+                print(WRONG_INPUT);
+            }
+            if (!isFree(inputVertical, inputHorizontal)) {
+                print(FIELD_IS_TAKEN_MESSAGE);
+            }
+            board[inputVertical][inputHorizontal] = currentSign;
+            printBoard(board);
+
+            if (checkWinner(currentSign)) {
+                print(currentPlayer + WINNER_MESSAGE);
                 break;
             }
 
-            print(player2Name + INPUT_MESSAGE);
-            inputVertical = scanner.nextInt();
-            inputHorizontal = scanner.nextInt();
-
-            if (checkInput(inputVertical, inputHorizontal)) {
-                board[inputVertical][inputHorizontal] = O;
-                printBoard(board);
-            }
-            if (checkWinner(O)) {
-                print(player2Name + WINNER_MESSAGE);
-                break;
-            }
+            currentPlayer = currentPlayer.equals(player1Name) ? player2Name : player1Name;
+            currentSign = currentSign.equals(X) ? O : X;
         }
     }
 
+    private static boolean isCorrectInput(int inputVertical) {
+        return inputVertical >= 0 && inputVertical < SIZE;
+    }
+
+    private static boolean isFree(int v, int h) {
+        return EMPTY.equals(board[v][h]);
+    }
 
     static void print(String s) {
         System.out.println(s);
     }
 
-    static boolean checkInput(int v, int h) {
-        if (!checkInputNums(v, h)) {
-            System.out.println(ERROR_MESSAGE);
-        } else {
-            if (!checkIfFieldIsFree(v, h)) {
-                System.out.println(FIELD_IS_TAKEN_MESSAGE);
-            }
-        }
-        return true;
-    }
-
-    static boolean checkInputNums(int v, int h) {
-        return (v >= 0 & v < SIZE) || (h >= 0 & h < SIZE);
-    }
-
-    static boolean checkIfFieldIsFree(int v, int h) {
-        return EMPTY.equals(board[v][h]);
-    }
-
     static boolean checkWinner(String s) {
-        if (hasWinningLine(SIZE, (v, h) -> s.equals(board[v][h]))) {
+        if (hasWinningLine((v, h) -> s.equals(board[v][h]))) {
             return true;
         }
-        if (hasWinningLine(SIZE, (h, v) -> s.equals(board[v][h]))) {
+        if (hasWinningLine((h, v) -> s.equals(board[v][h]))) {
             return true;
         }
-        if (hasWinningDiagonal(SIZE, i -> s.equals(board[i][i]))) {
+        if (hasWinningDiagonal(i -> s.equals(board[i][i]))) {
             return true;
         }
-        if (hasWinningDiagonal(SIZE, i -> s.equals(board[SIZE - 1 - i][i]))) {
+        if (hasWinningDiagonal(i -> s.equals(board[SIZE - i - 1][i]))) {
             return true;
         }
         return false;
     }
 
-    static boolean hasWinningLine(int size, BiFunction<Integer, Integer, Boolean> check) {
+    static boolean hasWinningLine(BiFunction<Integer, Integer, Boolean> check) {
         d1_loop:
-        for (int d1 = 0; d1 < size; d1++) {
-            for (int d2 = 0; d2 < size; d2++) {
+        for (int d1 = 0; d1 < SIZE; d1++) {
+            for (int d2 = 0; d2 < SIZE; d2++) {
                 if (!check.apply(d1, d2)) {
                     continue d1_loop;
                 }
@@ -111,21 +106,21 @@ public class MainGame {
         return false;
     }
 
-    static boolean hasWinningDiagonal(int size, Function<Integer, Boolean> check) {
-        boolean hasDiagonale1 = true;
-        for (int i = 0; i < size; i++) {
+    static boolean hasWinningDiagonal(Function<Integer, Boolean> check) {
+        boolean hasDiagonal = true;
+        for (int i = 0; i < SIZE; i++) {
             if (!check.apply(i)) {
-                hasDiagonale1 = false;
+                hasDiagonal = false;
                 break;
             }
         }
-        return hasDiagonale1;
+        return hasDiagonal;
     }
 
     static void printBoard(String[][] matrix) {
-        for (String[] array : matrix) {
-            for (String s : array) {
-                System.out.print("  " + s + "  ");
+        for (String[] row : matrix) {
+            for (String symbol : row) {
+                System.out.print("  " + symbol + "  ");
             }
             System.out.println("\n");
         }

@@ -50,6 +50,7 @@ public class MainGame {
 
             if (!isFree(inputVertical, inputHorizontal)) {
                 print(FIELD_IS_TAKEN_MESSAGE);
+                continue;
             }
             board[inputVertical][inputHorizontal] = currentSign;
             printBoard(board);

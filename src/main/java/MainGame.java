@@ -15,23 +15,31 @@ public class MainGame {
     final static String WRONG_INPUT = "Wrong input. Please enter numbers from 0 to " + (SIZE - 1);
     private static final String INPUT_VERTICAL_MESSAGE = ". Please enter vertical position:";
     private static final String INPUT_HORIZONTAL_MESSAGE = ". Please enter horizontal position:";
-    public static String[][] board = createBoard();
-    public static Integer inputVertical;
-    public static Integer inputHorizontal;
+
+    private final String[][] board = createBoard();
 
     public static void main(String[] args) {
+        new MainGame().start();
+    }
+
+    public void start() {
         printBoard(board);
 
-        Scanner scanner = new Scanner(System.in);
+        final Scanner scanner = new Scanner(System.in);
 
         print(GREETING);
-        String player1Name = scanner.next();
+        final String player1Name = scanner.next();
 
         print(GREETING);
-        String player2Name = scanner.next();
+        final String player2Name = scanner.next();
 
         String currentPlayer = player1Name;
         String currentSign = X;
+
+
+        Integer inputVertical;
+        Integer inputHorizontal;
+
         while (true) {
             do {
                 inputVertical = readInput(scanner, currentPlayer + INPUT_VERTICAL_MESSAGE);
@@ -70,7 +78,7 @@ public class MainGame {
         return inputVertical >= 0 && inputVertical < SIZE;
     }
 
-    private static boolean isFree(int v, int h) {
+    private boolean isFree(int v, int h) {
         return EMPTY.equals(board[v][h]);
     }
 
@@ -78,7 +86,7 @@ public class MainGame {
         System.out.println(s);
     }
 
-    static boolean checkWinner(String s) {
+    private boolean checkWinner(String s) {
         if (hasWinningLine((v, h) -> s.equals(board[v][h]))) {
             return true;
         }

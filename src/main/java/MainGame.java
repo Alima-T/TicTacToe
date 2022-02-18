@@ -3,35 +3,43 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class MainGame {
-    final static String GREETING = "Welcome to the game. What is your name?";
+    final static String GREETING = "Welcome to the game. What is your name?\n";
 
 
-    final static String FIELD_IS_TAKEN_MESSAGE = "This field is already taken. Please try again. ";
-    final static String WINNER_MESSAGE = "! Congratulations! You won!";
+    final static String FIELD_IS_TAKEN_MESSAGE = "This field is already taken. Please try again. \n";
+    final static String WINNER_MESSAGE = "! Congratulations! You won!\n";
     final static String X = "X";
     final static String O = "O";
     final static String EMPTY = "_";
     final static int SIZE = 3;
-    final static String WRONG_INPUT = "Wrong input. Please enter numbers from 0 to " + (SIZE - 1);
-    private static final String INPUT_VERTICAL_MESSAGE = ". Please enter vertical position:";
-    private static final String INPUT_HORIZONTAL_MESSAGE = ". Please enter horizontal position:";
+    final static String WRONG_INPUT = "Wrong input. Please enter numbers from 0 to " + (SIZE - 1) + "\n";
+    private static final String INPUT_VERTICAL_MESSAGE = ". Please enter vertical position:\n";
+    private static final String INPUT_HORIZONTAL_MESSAGE = ". Please enter horizontal position:\n";
 
-    private final String[][] board = createBoard();
+    private final String[][] board;
+    private final InputReader inputReader;
+    private final Printer printer;
+
+    public MainGame(InputReader reader, Printer printer) {
+        this.board = createBoard();
+        this.inputReader = reader;
+        this.printer = printer;
+    }
 
     public static void main(String[] args) {
-        new MainGame().start();
+        final Scanner scanner = new Scanner(System.in);
+        new MainGame(scanner::next, System.out::print).start();
     }
 
     public void start() {
         printBoard(board);
 
-        final Scanner scanner = new Scanner(System.in);
 
         print(GREETING);
-        final String player1Name = scanner.next();
+        final String player1Name = inputReader.readInput();
 
         print(GREETING);
-        final String player2Name = scanner.next();
+        final String player2Name = inputReader.readInput();
 
         String currentPlayer = player1Name;
         String currentSign = X;
@@ -42,11 +50,11 @@ public class MainGame {
 
         while (true) {
             do {
-                inputVertical = readInput(scanner, currentPlayer + INPUT_VERTICAL_MESSAGE);
-            } while(inputVertical == null);
+                inputVertical = readInput(currentPlayer + INPUT_VERTICAL_MESSAGE);
+            } while (inputVertical == null);
             do {
-                inputHorizontal = readInput(scanner, currentPlayer + INPUT_HORIZONTAL_MESSAGE);
-            } while(inputHorizontal == null);
+                inputHorizontal = readInput(currentPlayer + INPUT_HORIZONTAL_MESSAGE);
+            } while (inputHorizontal == null);
 
             if (!isFree(inputVertical, inputHorizontal)) {
                 print(FIELD_IS_TAKEN_MESSAGE);
@@ -65,9 +73,18 @@ public class MainGame {
         }
     }
 
-    private static Integer readInput(Scanner scanner, String message) {
+    private Integer readInput(String message) {
         print(message);
-        final int input  = scanner.nextInt();
+        int input = -1;
+        while (true) {
+            try {
+                input = Integer.parseInt(inputReader.readInput());
+                break;
+            } catch (Exception ex) {
+                print(WRONG_INPUT);
+            }
+        }
+
         if (isCorrectInput(input)) {
             return input;
         }
@@ -83,8 +100,8 @@ public class MainGame {
         return EMPTY.equals(board[v][h]);
     }
 
-    static void print(String s) {
-        System.out.println(s);
+    void print(String s) {
+        printer.print(s);
     }
 
     private boolean checkWinner(String s) {
@@ -127,12 +144,12 @@ public class MainGame {
         return hasDiagonal;
     }
 
-    static void printBoard(String[][] matrix) {
+    void printBoard(String[][] matrix) {
         for (String[] row : matrix) {
             for (String symbol : row) {
-                System.out.print("  " + symbol + "  ");
+                printer.print("  " + symbol + "  ");
             }
-            System.out.println("\n");
+            printer.print("\n\n");
         }
     }
 

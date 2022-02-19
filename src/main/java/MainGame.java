@@ -10,7 +10,8 @@ public class MainGame {
     final static String NEW_START_MESSAGE = "To start a new game write \"Y\" and press enter";
     final static String X = " X ";
     final static String O = " O ";
-    public static String[][] board = new String[][]{{" _ ", " _ ", " _ "}, {" _ ", " _ ", " _ "}, {" _ ", " _ ", " _ "}};
+    final static String FREE = " _ ";
+    public static String[][] board = new String[3][3];
     public static int inputVertical;
     public static int inputHorizontal;
 
@@ -57,6 +58,7 @@ public class MainGame {
             }
         }
     }
+
 
     static void print (String s) {
         System.out.println(s);

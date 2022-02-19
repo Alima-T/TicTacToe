@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class TicTacToeGame {
+public class MainGame {
     final static String GREETING = "Welcome to the game. What is your name?";
     final static String INPUT_MESSAGE = ", please enter numbers from 0 to 2 to choose the coordinates of the field horizontally and vertically: ";
     final static String ERROR_NOT_NUMBER = "Error! You entered not a number.";

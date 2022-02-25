@@ -11,10 +11,11 @@ public class MainGame {
     final static String X = " X ";
     final static String O = " O ";
     final static String FREE = " _ ";
+    final static int SIZE = 3;
+
     public static int inputVertical;
     public static int inputHorizontal;
-    public static int size = 3;
-    public static String[][] board = new String[size][size];
+    public static String[][] board = new String[SIZE][SIZE];
 
 
     public static void main (String[] args) {

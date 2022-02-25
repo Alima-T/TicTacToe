@@ -1,22 +1,21 @@
 import java.util.Scanner;
 
 public class MainGame {
-    final static String GREETING = "Welcome to the game. What is your name?";
-    final static String INPUT_MESSAGE = ", please enter numbers from 0 to 2 to choose the coordinates of the field horizontally and vertically: ";
-    final static String ERROR_NOT_NUMBER = "Error! You entered not a number.";
-    final static String ERROR_OUT_OF_BOARD = "Error! The data is out of the board.";
-    final static String FIELD_IS_TAKEN_MESSAGE = "Error! This field is already taken. Please try again.";
-    final static String WINNER_MESSAGE = "! Congratulations! You won!";
-    final static String NEW_START_MESSAGE = "To start a new game write \"Y\" and press enter";
     final static String X = " X ";
     final static String O = " O ";
     final static String FREE = " _ ";
     final static int SIZE = 3;
 
+    final static String GREETING = "Welcome to the game. What is your name?";
+    final static String ERROR_NOT_NUMBER = "Wrong input! Please enter number from 0 to " + (SIZE - 1);
+    final static String FIELD_IS_TAKEN_MESSAGE = "Error! This field is already taken. Please try again.";
+    final static String INPUT_VERTICAL_MESSAGE = ", please enter number for vertical position from 0 to " + (SIZE - 1);
+    final static String INPUT_HORIZONTAL_MESSAGE = ", please enter number for horizontal position: from 0 to " + (SIZE - 1);
+    final static String WINNER_MESSAGE = "! Congratulations!!! You won!!!";
+
     public static int inputVertical;
     public static int inputHorizontal;
     public static String[][] board = new String[SIZE][SIZE];
-
 
     public static void main (String[] args) {
         printBoard(board);
@@ -31,11 +30,10 @@ public class MainGame {
 
         while (true) {
             do {
-                print(player1Name + INPUT_MESSAGE);
+                print(player1Name + "");
                 inputVertical = scanner.nextInt();
                 inputHorizontal = scanner.nextInt();
-            }
-            while (!checkIfInputIsCorrect(inputVertical, inputHorizontal));
+            } while (!checkIfInputIsCorrect(inputVertical, inputHorizontal));
 
             fillBoard(inputVertical, inputHorizontal, X);
             printBoard(board);
@@ -46,11 +44,10 @@ public class MainGame {
             }
 
             do {
-                print(player2Name + INPUT_MESSAGE);
+                print(player2Name + "");
                 inputVertical = scanner.nextInt();
                 inputHorizontal = scanner.nextInt();
-            }
-            while (!checkIfInputIsCorrect(inputVertical, inputHorizontal));
+            } while (!checkIfInputIsCorrect(inputVertical, inputHorizontal));
 
             fillBoard(inputVertical, inputHorizontal, O);
             printBoard(board);
@@ -62,14 +59,13 @@ public class MainGame {
         }
     }
 
-
     static void print (String s) {
         System.out.println(s);
     }
 
     static boolean checkIfInputIsCorrect (int v, int h) {
         if (!checkIfInputAreNums(v, h)) {
-            System.out.println(ERROR_OUT_OF_BOARD);
+            System.out.println();
             return false;
         } else {
             if (!checkIfFieldIsFree(inputVertical, inputHorizontal, board)) {
@@ -123,7 +119,7 @@ public class MainGame {
         try {
             board[v][h] = sign;
         } catch (Exception ex) {
-            System.out.println(ERROR_OUT_OF_BOARD);
+            System.out.println();
         }
     }
 }

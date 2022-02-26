@@ -7,7 +7,7 @@ public class MainGame {
     final static int SIZE = 3;
 
     final static String GREETING = "Welcome to the game. What is your name?";
-    final static String ERROR_NOT_NUMBER = "Wrong input! Please enter number from 0 to " + (SIZE - 1);
+    final static String WRONG_INPUT = "Wrong input! Please enter number from 0 to " + (SIZE - 1);
     final static String FIELD_IS_TAKEN_MESSAGE = "Error! This field is already taken. Please try again.";
     final static String INPUT_VERTICAL_MESSAGE = ", please enter number for vertical position from 0 to " + (SIZE - 1);
     final static String INPUT_HORIZONTAL_MESSAGE = ", please enter number for horizontal position: from 0 to " + (SIZE - 1);
@@ -33,7 +33,7 @@ public class MainGame {
                 print(player1Name + "");
                 inputVertical = scanner.nextInt();
                 inputHorizontal = scanner.nextInt();
-            } while (!fieldIsFree(inputVertical, inputHorizontal, board));
+            } while (!fieldIsFree(inputVertical, inputHorizontal));
 
             fillBoard(inputVertical, inputHorizontal, X);
             printBoard(board);
@@ -47,7 +47,7 @@ public class MainGame {
                 print(player2Name + "");
                 inputVertical = scanner.nextInt();
                 inputHorizontal = scanner.nextInt();
-            } while (!fieldIsFree(inputVertical, inputHorizontal, board));
+            } while (!fieldIsFree(inputVertical, inputHorizontal));
 
             fillBoard(inputVertical, inputHorizontal, O);
             printBoard(board);
@@ -70,15 +70,8 @@ public class MainGame {
         return true;
     }
 
-    static boolean fieldIsFree (int v, int h, String[][] board) {
-        try {
-            if (board[v][h] != " _ ") {
-                return false;
-            }
-        } catch (Exception ex) {
-            System.out.println(" ");
-        }
-        return true;
+    static boolean fieldIsFree (int v, int h) {
+        return board[v][h] == FREE;
     }
 
     static boolean checkWinner (String s) {

@@ -13,8 +13,8 @@ public class MainGame {
     final static String INPUT_HORIZONTAL_MESSAGE = ", please enter number for horizontal position: from 0 to " + (SIZE - 1);
     final static String WINNER_MESSAGE = "! Congratulations!!! You won!!!";
 
-    public static int inputVertical;
-    public static int inputHorizontal;
+    public static Integer inputVertical;
+    public static Integer inputHorizontal;
     public static String[][] board = new String[SIZE][SIZE];
 
     public static void main (String[] args) {
@@ -29,32 +29,63 @@ public class MainGame {
         String player2Name = scanner.next();
 
         while (true) {
-            do {
-                print(player1Name + "");
-                inputVertical = scanner.nextInt();
-                inputHorizontal = scanner.nextInt();
-            } while (!fieldIsFree(inputVertical, inputHorizontal));
+            while (true) {
+                do {
+                    print(player1Name + INPUT_VERTICAL_MESSAGE);
+                    inputVertical = scanner.nextInt();
+                    if (!inputIsCorrect(inputVertical)) {
+                        System.out.println(WRONG_INPUT);
+                    }
+                } while (inputVertical == null);
 
-            fillBoard(inputVertical, inputHorizontal, X);
-            printBoard(board);
+                do {
+                    print(player1Name + INPUT_HORIZONTAL_MESSAGE);
+                    inputHorizontal = scanner.nextInt();
+                    if (!inputIsCorrect(inputHorizontal)) {
+                        System.out.println(WRONG_INPUT);
+                    }
+                } while (inputHorizontal == null);
 
-            if (checkWinner(X)) {
-                print(player1Name + WINNER_MESSAGE);
-                break;
+                if (!fieldIsFree(inputVertical, inputHorizontal)) {
+                    System.out.println(FIELD_IS_TAKEN_MESSAGE);
+                } else {
+                    fillBoard(inputVertical, inputHorizontal, X);
+                    printBoard(board);
+                }
+
+                if (checkWinner(X)) {
+                    print(player1Name + WINNER_MESSAGE);
+                    break;
+                }
             }
 
-            do {
-                print(player2Name + "");
-                inputVertical = scanner.nextInt();
-                inputHorizontal = scanner.nextInt();
-            } while (!fieldIsFree(inputVertical, inputHorizontal));
+            while (true) {
+                do {
+                    print(player2Name + INPUT_VERTICAL_MESSAGE);
+                    inputVertical = scanner.nextInt();
+                    if (!inputIsCorrect(inputVertical)) {
+                        System.out.println(WRONG_INPUT);
+                    }
+                } while (inputVertical == null);
 
-            fillBoard(inputVertical, inputHorizontal, O);
-            printBoard(board);
+                do {
+                    print(player2Name + INPUT_HORIZONTAL_MESSAGE);
+                    inputHorizontal = scanner.nextInt();
+                    if (!inputIsCorrect(inputHorizontal)) {
+                        System.out.println(WRONG_INPUT);
+                    }
+                } while (inputHorizontal == null);
 
-            if (checkWinner(O)) {
-                print(player2Name + WINNER_MESSAGE);
-                break;
+                if (!fieldIsFree(inputVertical, inputHorizontal)) {
+                    System.out.println(FIELD_IS_TAKEN_MESSAGE);
+                }
+                fillBoard(inputVertical, inputHorizontal, O);
+                printBoard(board);
+
+                if (checkWinner(O)) {
+                    print(player2Name + WINNER_MESSAGE);
+                    break;
+                }
             }
         }
     }
@@ -63,11 +94,8 @@ public class MainGame {
         System.out.println(s);
     }
 
-    static boolean checkIfInputAreNums (int v, int h) {
-        if (!(v >= 0 & v <= 2) || !(h >= 0 & h <= 2)) {
-            return false;
-        }
-        return true;
+    static boolean inputIsCorrect (int i) {
+        return (i >= 0 & i < SIZE);
     }
 
     static boolean fieldIsFree (int v, int h) {

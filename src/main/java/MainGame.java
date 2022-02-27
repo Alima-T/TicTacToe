@@ -31,62 +31,60 @@ public class MainGame {
 
         while (true) {
             while (true) {
-                do {
-                    print(player1Name + INPUT_VERTICAL_MESSAGE);
-                    inputVertical = scanner.nextInt();
-                    if (!inputIsCorrect(inputVertical)) {
-                        System.out.println(WRONG_INPUT);
-                    }
-                } while (inputVertical == null);
-
-                do {
-                    print(player1Name + INPUT_HORIZONTAL_MESSAGE);
-                    inputHorizontal = scanner.nextInt();
-                    if (!inputIsCorrect(inputHorizontal)) {
-                        System.out.println(WRONG_INPUT);
-                    }
-                } while (inputHorizontal == null);
-
-                if (!fieldIsFree(inputVertical, inputHorizontal)) {
-                    System.out.println(FIELD_IS_TAKEN_MESSAGE);
-                } else {
-                    fillBoard(inputVertical, inputHorizontal, X);
-                    printBoard(board);
-                }
-
-                if (checkWinner(X)) {
-                    print(player1Name + WINNER_MESSAGE);
+                print(player1Name + INPUT_VERTICAL_MESSAGE);
+                inputVertical = scanner.nextInt();
+                if (inputIsCorrect(inputVertical)) {
                     break;
                 }
+                print(WRONG_INPUT);
+            }
+            while (true) {
+                print(player1Name + INPUT_HORIZONTAL_MESSAGE);
+                inputHorizontal = scanner.nextInt();
+                if (inputIsCorrect(inputHorizontal)) {
+                    break;
+                }
+                print(WRONG_INPUT);
+            }
+
+            if (!fieldIsFree(inputVertical, inputHorizontal)) {
+                System.out.println(FIELD_IS_TAKEN_MESSAGE);
+            } else {
+                fillBoard(inputVertical, inputHorizontal, X);
+                printBoard(board);
+            }
+
+            if (checkWinner(X)) {
+                print(player1Name + WINNER_MESSAGE);
+                break;
             }
 
             while (true) {
-                do {
-                    print(player2Name + INPUT_VERTICAL_MESSAGE);
-                    inputVertical = scanner.nextInt();
-                    if (!inputIsCorrect(inputVertical)) {
-                        System.out.println(WRONG_INPUT);
-                    }
-                } while (inputVertical == null);
-
-                do {
-                    print(player2Name + INPUT_HORIZONTAL_MESSAGE);
-                    inputHorizontal = scanner.nextInt();
-                    if (!inputIsCorrect(inputHorizontal)) {
-                        System.out.println(WRONG_INPUT);
-                    }
-                } while (inputHorizontal == null);
-
-                if (!fieldIsFree(inputVertical, inputHorizontal)) {
-                    System.out.println(FIELD_IS_TAKEN_MESSAGE);
-                }
-                fillBoard(inputVertical, inputHorizontal, O);
-                printBoard(board);
-
-                if (checkWinner(O)) {
-                    print(player2Name + WINNER_MESSAGE);
+                print(player1Name + INPUT_VERTICAL_MESSAGE);
+                inputVertical = scanner.nextInt();
+                if (inputIsCorrect(inputVertical)) {
                     break;
                 }
+                print(WRONG_INPUT);
+            }
+            while (true) {
+                print(player1Name + INPUT_HORIZONTAL_MESSAGE);
+                inputHorizontal = scanner.nextInt();
+                if (inputIsCorrect(inputHorizontal)) {
+                    break;
+                }
+                print(WRONG_INPUT);
+            }
+
+            if (!fieldIsFree(inputVertical, inputHorizontal)) {
+                System.out.println(FIELD_IS_TAKEN_MESSAGE);
+            }
+            fillBoard(inputVertical, inputHorizontal, O);
+            printBoard(board);
+
+            if (checkWinner(O)) {
+                print(player2Name + WINNER_MESSAGE);
+                break;
             }
         }
     }

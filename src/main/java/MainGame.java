@@ -18,6 +18,7 @@ public class MainGame {
     public static String[][] board = new String[SIZE][SIZE];
 
     public static void main (String[] args) {
+        createBoard(board);
         printBoard(board);
 
         Scanner scanner = new Scanner(System.in);
@@ -129,6 +130,16 @@ public class MainGame {
         } catch (Exception ex) {
             System.out.println();
         }
+    }
+
+    static String[][] createBoard (String[][] board) {
+        for (int v = 0; v < board.length; v++) {
+            final String[] row = board[v];
+            for (int h = 0; h < row.length; h++) {
+                board[v][h] = FREE;
+            }
+        }
+        return board;
     }
 }
 

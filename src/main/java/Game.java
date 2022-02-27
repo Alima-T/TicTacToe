@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class MainGame {
+public class Game {
     final static String X = " X ";
     final static String O = " O ";
     final static String FREE = " _ ";

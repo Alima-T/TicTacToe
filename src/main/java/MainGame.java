@@ -10,11 +10,13 @@ public class MainGame {
     final static String NEW_START_MESSAGE = "To start a new game write \"Y\" and press enter";
     final static String X = " X ";
     final static String O = " O ";
+    final static String FREE = "_";
     public static String[][] board = new String[][]{{" _ ", " _ ", " _ "}, {" _ ", " _ ", " _ "}, {" _ ", " _ ", " _ "}};
     public static int inputVertical;
     public static int inputHorizontal;
 
     public static void main (String[] args) {
+        createBoard(board);
         printBoard(board);
 
         Scanner scanner = new Scanner(System.in);
@@ -104,6 +106,16 @@ public class MainGame {
             }
             System.out.println("\n");
         }
+    }
+
+    static String[][] createBoard (String[][] board) {
+        for (int v = 0; v < board.length; v++) {
+            final String[] row = board[v];
+            for (int h = 0; h < row.length; h++) {
+                board[v][h] = FREE;
+            }
+        }
+        return board;
     }
 }
 

@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class MainGame {
+public class Game {
     final static String X = "X";
     final static String O = "O";
     final static String FREE = "_";
@@ -16,10 +16,6 @@ public class MainGame {
     public static Integer inputVertical;
     public static Integer inputHorizontal;
     public static String[][] board = new String[SIZE][SIZE];
-
-    public static void main (String[] args) {
-        new MainGame().start();
-    }
 
     public static void start(){
         createBoard(board);

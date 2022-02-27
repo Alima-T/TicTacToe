@@ -1,9 +1,9 @@
 import java.util.Scanner;
 
 public class MainGame {
-    final static String X = " X ";
-    final static String O = " O ";
-    final static String FREE = " _ ";
+    final static String X = "X";
+    final static String O = "O";
+    final static String FREE = "_";
     final static int SIZE = 3;
 
     final static String GREETING = "Welcome to the game. What is your name?";
@@ -18,6 +18,10 @@ public class MainGame {
     public static String[][] board = new String[SIZE][SIZE];
 
     public static void main (String[] args) {
+        new MainGame().start();
+    }
+
+    public static void start(){
         createBoard(board);
         printBoard(board);
 
@@ -118,7 +122,7 @@ public class MainGame {
     static void printBoard (String[][] matrix) {
         for (String[] array: matrix) {
             for (String s: array) {
-                System.out.print(" " + s + " ");
+                System.out.print("  " + s + "  ");
             }
             System.out.println("\n");
         }

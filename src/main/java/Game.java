@@ -13,82 +13,54 @@ public class Game {
     final static String INPUT_HORIZONTAL_MESSAGE = ", please enter number for horizontal position: from 0 to " + (SIZE - 1);
     final static String WINNER_MESSAGE = "! Congratulations!!! You won!!!";
 
-    public static Integer inputVertical;
-    public static Integer inputHorizontal;
     public static String[][] board;
+    private final InputReader inputReader;
+    private final Printer printer;
 
-    private InputReader inputReader;
-    private Printer printer;
+    public Game(InputReader inputReader, Printer printer) {
+        this.inputReader = inputReader;
+        this.printer = printer;
+        this.board = createBoard(SIZE,SIZE);
+    }
 
-    public static void start(){
-        createBoard(SIZE,SIZE);
+    public void start(){
         printBoard(board);
 
-        Scanner scanner = new Scanner(System.in);
+        printer.print(GREETING);
+        final String player1Name = inputReader.readInput();
 
-        print(GREETING);
-        String player1Name = scanner.next();
+        printer.print(GREETING);
+        final String player2Name = inputReader.readInput();
 
-        print(GREETING);
-        String player2Name = scanner.next();
+        String currentPlayer = player1Name;
+        String currentSign = X;
+
+
+        Integer inputVertical;
+        Integer inputHorizontal;
 
         while (true) {
-            while (true) {
-                print(player1Name + INPUT_VERTICAL_MESSAGE);
-                inputVertical = scanner.nextInt();
-                if (inputIsCorrect(inputVertical)) {
-                    break;
-                }
-                print(WRONG_INPUT);
-            }
-            while (true) {
-                print(player1Name + INPUT_HORIZONTAL_MESSAGE);
-                inputHorizontal = scanner.nextInt();
-                if (inputIsCorrect(inputHorizontal)) {
-                    break;
-                }
-                print(WRONG_INPUT);
-            }
+            do {
+                inputVertical = readInput(currentPlayer + INPUT_VERTICAL_MESSAGE);
+            } while (inputVertical == null);
+            do {
+                inputHorizontal = readInput(currentPlayer + INPUT_HORIZONTAL_MESSAGE);
+            } while (inputHorizontal == null);
 
             if (!fieldIsFree(inputVertical, inputHorizontal)) {
-                System.out.println(FIELD_IS_TAKEN_MESSAGE);
-            } else {
-                fillBoard(inputVertical, inputHorizontal, X);
-                printBoard(board);
+                printer.print(FIELD_IS_TAKEN_MESSAGE);
+                continue;
             }
-
-            if (checkWinner(X)) {
-                print(player1Name + WINNER_MESSAGE);
-                break;
-            }
-
-            while (true) {
-                print(player1Name + INPUT_VERTICAL_MESSAGE);
-                inputVertical = scanner.nextInt();
-                if (inputIsCorrect(inputVertical)) {
-                    break;
-                }
-                print(WRONG_INPUT);
-            }
-            while (true) {
-                print(player1Name + INPUT_HORIZONTAL_MESSAGE);
-                inputHorizontal = scanner.nextInt();
-                if (inputIsCorrect(inputHorizontal)) {
-                    break;
-                }
-                print(WRONG_INPUT);
-            }
-
-            if (!fieldIsFree(inputVertical, inputHorizontal)) {
-                System.out.println(FIELD_IS_TAKEN_MESSAGE);
-            }
-            fillBoard(inputVertical, inputHorizontal, O);
+            board[inputVertical][inputHorizontal] = currentSign;
             printBoard(board);
 
-            if (checkWinner(O)) {
-                print(player2Name + WINNER_MESSAGE);
+            if (checkWinner(currentSign)) {
+                printer.print(currentPlayer + WINNER_MESSAGE);
                 break;
             }
+
+            currentPlayer = currentPlayer.equals(player1Name) ? player2Name : player1Name;
+            currentSign = currentSign.equals(X) ? O : X;
         }
     }
 

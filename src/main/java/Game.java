@@ -17,6 +17,9 @@ public class Game {
     public static Integer inputHorizontal;
     public static String[][] board = new String[SIZE][SIZE];
 
+    private InputReader inputReader;
+    private Printer printer;
+
     public static void start(){
         createBoard(board);
         printBoard(board);
@@ -138,6 +141,30 @@ public class Game {
             }
         }
         return board;
+    }
+    public interface Printer {
+        void print(String message);
+    }
+
+    public interface InputReader {
+        String readInput();
+    }
+    private Integer readInput(String text) {
+        printer.print(text);
+        int input = -1;
+        while (true) {
+            try {
+                input = Integer.parseInt(inputReader.readInput());
+                break;
+            } catch (Exception ex) {
+                printer.print(WRONG_INPUT);
+            }
+        }
+        if (inputIsCorrect(input)) {
+            return input;
+        }
+        printer.print(WRONG_INPUT);
+        return null;
     }
 }
 

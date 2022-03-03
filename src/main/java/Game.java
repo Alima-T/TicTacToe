@@ -15,10 +15,13 @@ public class Game {
 
     public static Integer inputVertical;
     public static Integer inputHorizontal;
-    public static String[][] board = new String[SIZE][SIZE];
+    public static String[][] board;
+
+    private InputReader inputReader;
+    private Printer printer;
 
     public static void start(){
-        createBoard(board);
+        createBoard(SIZE,SIZE);
         printBoard(board);
 
         Scanner scanner = new Scanner(System.in);
@@ -130,7 +133,8 @@ public class Game {
         }
     }
 
-    static String[][] createBoard (String[][] board) {
+    static String[][] createBoard (int size1, int size2) {
+        final String[][] board = new String[size1][size2];
         for (int v = 0; v < board.length; v++) {
             final String[] row = board[v];
             for (int h = 0; h < row.length; h++) {
@@ -138,6 +142,30 @@ public class Game {
             }
         }
         return board;
+    }
+    public interface Printer {
+        void print(String message);
+    }
+
+    public interface InputReader {
+        String readInput();
+    }
+    private Integer readInput(String text) {
+        printer.print(text);
+        int input = -1;
+        while (true) {
+            try {
+                input = Integer.parseInt(inputReader.readInput());
+                break;
+            } catch (Exception ex) {
+                printer.print(WRONG_INPUT);
+            }
+        }
+        if (inputIsCorrect(input)) {
+            return input;
+        }
+        printer.print(WRONG_INPUT);
+        return null;
     }
 }
 

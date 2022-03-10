@@ -20,10 +20,10 @@ public class Game {
     public Game(InputReader inputReader, Printer printer) {
         this.inputReader = inputReader;
         this.printer = printer;
-        this.board = createBoard(SIZE,SIZE,FREE);
+        this.board = createBoard(SIZE, SIZE, FREE);
     }
 
-    public void start(){
+    public void start() {
         printBoard(board);
 
         printer.print(GREETING);
@@ -64,15 +64,15 @@ public class Game {
         }
     }
 
-    static boolean inputIsCorrect (int i) {
+    static boolean inputIsCorrect(int i) {
         return (i >= 0 & i < SIZE);
     }
 
-    static boolean fieldIsFree (int v, int h) {
+    static boolean fieldIsFree(int v, int h) {
         return board[v][h] == FREE;
     }
 
-    static boolean checkWinner (String s) {
+    static boolean checkWinner(String s) {
         for (int i = 0; i < board.length; i++) {
             if ((board[i][0] == s & board[i][1] == s & board[i][2] == s) || (board[0][i] == s & board[1][i] == s & board[2][i] == s)) {
                 return true;
@@ -84,16 +84,16 @@ public class Game {
         return false;
     }
 
-    static void printBoard (String[][] matrix) {
-        for (String[] array: matrix) {
-            for (String s: array) {
+    static void printBoard(String[][] matrix) {
+        for (String[] array : matrix) {
+            for (String s : array) {
                 System.out.print("  " + s + "  ");
             }
             System.out.println("\n");
         }
     }
 
-    static String[][] createBoard (int size1, int size2, String s) {
+    static String[][] createBoard(int size1, int size2, String s) {
         final String[][] board = new String[size1][size2];
         for (int v = 0; v < board.length; v++) {
             final String[] row = board[v];

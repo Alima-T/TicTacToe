@@ -20,7 +20,7 @@ public class Game {
     public Game(InputReader inputReader, Printer printer) {
         this.inputReader = inputReader;
         this.printer = printer;
-        this.board = createBoard(SIZE,SIZE);
+        this.board = createBoard(SIZE,SIZE,FREE);
     }
 
     public void start(){
@@ -105,12 +105,12 @@ public class Game {
         }
     }
 
-    static String[][] createBoard (int size1, int size2) {
+    static String[][] createBoard (int size1, int size2, String s) {
         final String[][] board = new String[size1][size2];
         for (int v = 0; v < board.length; v++) {
             final String[] row = board[v];
             for (int h = 0; h < row.length; h++) {
-                board[v][h] = FREE;
+                board[v][h] = s;
             }
         }
         return board;

@@ -64,10 +64,6 @@ public class Game {
         }
     }
 
-    static void print (String s) {
-        System.out.println(s);
-    }
-
     static boolean inputIsCorrect (int i) {
         return (i >= 0 & i < SIZE);
     }
@@ -97,14 +93,6 @@ public class Game {
         }
     }
 
-    static void fillBoard (int v, int h, String sign) {
-        try {
-            board[v][h] = sign;
-        } catch (Exception ex) {
-            System.out.println();
-        }
-    }
-
     static String[][] createBoard (int size1, int size2, String s) {
         final String[][] board = new String[size1][size2];
         for (int v = 0; v < board.length; v++) {
@@ -115,13 +103,7 @@ public class Game {
         }
         return board;
     }
-    public interface Printer {
-        void print(String message);
-    }
 
-    public interface InputReader {
-        String readInput();
-    }
     private Integer readInput(String text) {
         printer.print(text);
         int input = -1;

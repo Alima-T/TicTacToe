@@ -1,5 +1,8 @@
+import java.util.Scanner;
+
 public class Main {
     public static void main (String[] args) {
-        new Game().start();
+        Scanner scanner = new Scanner(System.in);
+        new Game(scanner::next, System.out::print).start();
     }
 }
